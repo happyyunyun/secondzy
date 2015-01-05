@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>
+    </title>
+    <meta charset="UTF-8"></meta>
+    <link rel="stylesheet" type="text/css" href="huandeng.css"/>
+    <link rel="shortcut icon" href="img/heart1.jpg" />
+  </head>
+  <body>
+    <div id="flex-viewport">
+      <ul id="slides">
+        <li>
+          <a href="http://www.yetang.com/sale/3713" >
+            <img src="img/c1.jpg">
+          </a>
+        </li>
+        <li>
+          <a href="http://www.yetang.com/sale/3715" >
+            <img src="img/c2.jpg">
+          </a>
+        </li>
+        <li>
+          <a href="http://www.yetang.com/sale/3755" >
+            <img src="img/c3.jpg">
+          </a>
+        </li>
+      </ul>
+      <div id="direction">
+        <ul class="flex-direction-nav">
+          <li>
+            <a id="jiantouzuo" >Previous</a>
+          </li>
+          <li>
+            <a id="jiantouyou" >Next</a>
+          </li>
+        </ul>
+      </div>
+      <ul id="flex-nav">
+        <li>
+          1
+        </li>
+        <li>
+          2
+        </li>
+        <li>
+          3
+        </li>
+      </ul>
+    </div>
+
+    <script>
+      var box=document.getElementById("flex-viewport");
+      var navs=document.getElementById("flex-nav").getElementsByTagName("li");
+      var images=document.getElementById("slides").getElementsByTagName("li");
+      var index=0;
+      for (var i=0; i<navs.length; i++) {
+        var navs_item=navs[i];
+        //navs[i].index=i;
+        navs_item.onclick=function() {
+          for (var s = 0; s < navs.length; s++) {
+            if (this.innerText==navs[s].innerText) {
+                index=s;
+                break;
+            };
+          };
+          for(var j=0;j<images.length;j++) {
+            images[j].style.display="none";
+            navs[j].className="";
+          }
+          images[index].style.display="";
+          navs[index].className="circle";
+        }
+      };
+      function appear()
+      {
+        for(var j=0;j<images.length;j++)
+        {
+          images[j].style.display="none";
+          navs[j].className="";
+        }
+        
+        images[index].style.display="";
+        navs[index].className="circle";
+        //alert(this.index);
+        index=index==images.length-1?0:index+1;
+      }
+      appear();
+      var auto=setInterval(appear,2000);
+      box.onmouseover=function(){
+        clearInterval(auto);
+      }
+      box.onmouseout=function(){
+        auto=setInterval(appear,2000);
+      }
+      var arrow=function(){
+        document.getElementById("direction").style.display="block";
+      }
+      var unarr=function(){
+        document.getElementById("direction").style.display="none";
+      }
+      function appear1(n){
+      
+      }
+      function arr(m){
+      for (var s = 0; s < navs.length; s++) {
+            if (images[s].style.display=="block") {
+                index=s;
+                break;
+            };
+          };
+      if(!m){
+        index++;
+        if(index>(images.length-1)){index=0;}
+      }
+      else{
+        index--;
+        if(index<0){index=images.length-1;}
+      }
+      //appear1(index);
+      for(var j=0;j<images.length;j++){
+        images[j].style.display="none";
+        navs[j].className="";
+      }
+      images[index].style.display="block";
+      navs[index].className="circle";
+      }
+      jiantouzuo.onclick=function(){arr(true);}
+      jiantouyou.onclick=function(){arr(false);}
+        
+    </script> 
+  </body>
+</html>
+
